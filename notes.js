@@ -17,9 +17,10 @@ const addNote = function(title, body){
             body:body
         })
         saveNotes(notes)
+        console.log(chalk.green('added successfully'))
        // console.log('new note added',notes)
     }else{
-        console.log('note title taken')
+        console.log(chalk.red('note title taken'))
     }
 
 }
@@ -28,9 +29,7 @@ const addNote = function(title, body){
 
 const removeNote = function(title){
     const notes = loadNotes()
-   const remain =  notes.filter((note)=>{
-           return note.title !== title
-    })
+   const remain =  notes.filter(note=>note.title !== title)
     console.log(remain)
     //console.log(title)
     saveNotes(remain)
@@ -39,6 +38,14 @@ const removeNote = function(title){
     }else{
         console.log(chalk.red.inverse('no matched note'))
     }
+}
+
+
+const listNote = function(){
+    console.log('list')
+    const notes = loadNotes()
+    notes.forEach(note =>
+        console.log(note.title));
 }
 
 const loadNotes = function(){
@@ -58,7 +65,8 @@ const saveNotes = function(notes){
 module.exports = {
     getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNote: listNote
 }
 
 
