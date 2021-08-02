@@ -17,16 +17,28 @@ const addNote = function(title, body){
             body:body
         })
         saveNotes(notes)
-        console.log('new note added',notes)
+       // console.log('new note added',notes)
     }else{
         console.log('note title taken')
     }
 
 }
 
-const saveNotes = function(notes){
-    const dataJson = JSON.stringify(notes)
-    fs.writeFileSync('./notes.json', dataJson)
+
+
+const removeNote = function(title){
+    const notes = loadNotes()
+   const remain =  notes.filter((note)=>{
+           return note.title !== title
+    })
+    console.log(remain)
+    //console.log(title)
+    saveNotes(remain)
+    if(notes.length > remain.length ){
+        console.log(chalk.green.inverse('note removed successfully'))
+    }else{
+        console.log(chalk.red.inverse('no matched note'))
+    }
 }
 
 const loadNotes = function(){
@@ -38,10 +50,15 @@ const loadNotes = function(){
         return []
     }
 }
+const saveNotes = function(notes){
+    const dataJson = JSON.stringify(notes)
+    fs.writeFileSync('./notes.json', dataJson)
+}
 
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 }
 
 
