@@ -15,8 +15,10 @@ fs.writeFileSync('1-json.json', userJson)
 
 
 
-
-
+const arr = [2,3,4,5,6]
+t=70;
+const store = arr.find((a)=>a===t)
+console.log(store)
 
 // const dataJson = dataBuffer.toString()
 // const data = JSON.parse(dataJson)
